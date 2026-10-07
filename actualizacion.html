@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FR-158 · Ficha de actualización de datos</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/craco-theme.css">
+</head>
+<body>
+<div class="craco-shell">
+  <nav class="craco-nav" aria-label="Navegación principal">
+    <a href="./index.html">Reportes</a>
+    <a href="./actualizacion.html" aria-current="page">Actualizar ficha</a>
+  </nav>
+  <header class="craco-banner">
+    <div class="craco-banner-copy">
+      <h1>Gestión de Recursos Humanos</h1>
+      <p>Actualización de datos del personal · FR-158</p>
+    </div>
+  </header>
+</div>
+<main class="pagina">
+
+<p class="tblock">HOJA 03 · SISTEMA DE GESTIÓN DE PERSONAS</p>
+<header class="cabecera">
+  <h1>Ficha de actualización de datos</h1>
+  <dl class="control">
+    <div><dt>Código</dt><dd>FR-158</dd></div>
+    <div><dt>Rev.</dt><dd>01</dd></div>
+  </dl>
+</header>
+<p class="aviso">Todos los datos aquí consignados son tratados con confidencialidad.</p>
+
+<form id="ficha" autocomplete="on" novalidate>
+
+<section class="progreso-contenedor" aria-label="Progreso del formulario">
+  <div class="progreso-resumen">
+    <span id="progreso-texto">Paso 1 de 10</span>
+    <span id="progreso-porcentaje">10 %</span>
+  </div>
+  <div id="progreso" class="progreso" role="progressbar" aria-label="Progreso de la ficha" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" aria-valuetext="Paso 1 de 10: Empresa">
+    <span id="progreso-barra"></span>
+  </div>
+  <ol id="lista-pasos" class="lista-pasos" aria-label="Secciones del formulario"></ol>
+</section>
+
+<fieldset class="seccion">
+  <legend>Empresa</legend>
+  <div class="grid">
+    <label class="campo completo">Seleccione su empresa
+      <select name="empresa" required>
+        <option value="">Seleccionar</option>
+        <option>Metalúrgica Vera SAE</option>
+        <option>Galvamax SA</option>
+        <option>Rackpar SA</option>
+      </select>
+    </label>
+  </div>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Datos personales y contacto personal</legend>
+  <h2>Datos personales</h2>
+  <div class="grid">
+    <label class="campo campo--bloque">Nombres<input name="nombres" required autocomplete="given-name" placeholder="Ingrese sus nombres"></label>
+    <label class="campo campo--bloque">Apellidos<input name="apellidos" required autocomplete="family-name" placeholder="Ingrese sus apellidos"></label>
+    <label class="campo campo--bloque">N° de cédula<input name="nro_cedula" required inputmode="numeric" pattern="[0-9.]{4,12}" title="Solo números" placeholder="Ej.: 1234567"></label>
+    <label class="campo">Fecha de nacimiento<input type="date" name="fecha_nacimiento" required></label>
+    <label class="campo">Lugar de nacimiento<input name="lugar_nacimiento" placeholder="Ciudad o localidad"></label>
+    <label class="campo">Nacionalidad<input name="nacionalidad" value="Paraguaya"></label>
+    <label class="campo campo--bloque">Cédula vigente · frente
+      <input type="file" name="cedula_frente" accept="image/png,image/jpeg,.png,.jpg,.jpeg" required>
+      <small>PNG, JPG o JPEG, hasta 5 MB.</small>
+    </label>
+    <label class="campo campo--bloque">Cédula vigente · reverso
+      <input type="file" name="cedula_reverso" accept="image/png,image/jpeg,.png,.jpg,.jpeg" required>
+      <small>PNG, JPG o JPEG, hasta 5 MB.</small>
+    </label>
+  </div>
+  <h2>Contacto personal</h2>
+  <div class="grid">
+    <label class="campo">Celular Nº<input type="tel" name="celular" required autocomplete="tel" placeholder="Ej.: 0981 123 456"></label>
+    <label class="campo">Línea baja<input type="tel" name="linea_baja" placeholder="Ej.: 021 123 456"></label>
+    <label class="campo campo--bloque">Correo electrónico<input type="email" name="correo" required autocomplete="email" placeholder="nombre@empresa.com"></label>
+    <label class="campo">Estado civil
+      <select name="estado_civil"><option value="">Seleccionar</option><option>Soltero/a</option><option>Casado/a</option><option>Unión de hecho</option><option>Divorciado/a</option><option>Viudo/a</option></select>
+    </label>
+    <label class="campo">Vivienda
+      <select name="tipo_vivienda"><option value="">Seleccionar</option><option>Propia</option><option>Alquilada</option><option>Familiar</option><option>Prestada</option><option>Otra</option></select>
+    </label>
+  </div>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Dirección y ubicación</legend>
+  <h2>Dirección donde actualmente vive</h2>
+  <div class="grid">
+    <label class="campo doble">Calle<input name="calle"></label>
+    <label class="campo">N° de casa<input name="numero_casa"></label>
+    <label class="campo">Barrio<input name="barrio"></label>
+    <label class="campo">Ciudad<input name="ciudad"></label>
+    <label class="campo">Departamento<select name="departamento"><option value="">Seleccionar</option></select></label>
+  </div>
+
+  <h2>Ubicación de la vivienda</h2>
+  <p class="nota">Toque el mapa para marcar dónde vive y arrastre el marcador para ajustarlo. En Chrome, el GPS requiere una conexión segura (HTTPS o localhost) y permiso de ubicación.</p>
+  <div class="mapa-barra">
+    <button type="button" id="btn-ubicacion" class="secundario">Usar mi ubicación actual</button>
+    <span id="coords" class="coords" aria-live="polite">Sin ubicación marcada</span>
+  </div>
+  <div id="mapa" class="mapa" aria-label="Mapa para marcar la ubicación de la vivienda"></div>
+  <input type="hidden" name="ubicacion_lat">
+  <input type="hidden" name="ubicacion_lng">
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Contacto de emergencia</legend>
+  <h2>A quién contactar en caso de necesidad</h2>
+  <div id="g-contactos" class="grupo"></div>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Seguro de vida · Datos del beneficiario</legend>
+  <div id="g-beneficiarios" class="grupo"></div>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Datos familiares</legend>
+  <div id="g-familiares" class="grupo"></div>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Salud</legend>
+  <p class="nota">Padece o padeció alguna de las siguientes dolencias:</p>
+  <div class="sino" data-name="salud_orl_alergias">Problemas de ojos, oídos, nariz, garganta o alergias</div>
+  <div class="sino" data-name="salud_piel_vasos">Problemas de piel, venas o arterias</div>
+  <div class="sino" data-name="salud_sistemas">Problemas del sistema nervioso (insomnio, etc.), endocrino, respiratorio, muscular u óseo</div>
+  <div class="sino" data-name="salud_abdominal">Problemas abdominales (gastritis, úlcera, etc.)</div>
+  <div class="sino" data-name="salud_otras">¿Otras afecciones no mencionadas aquí?</div>
+  <div class="grid">
+    <label class="campo completo">Si respondió Sí, ¿cuáles?<input name="salud_otras_detalle"></label>
+  </div>
+  <div class="sino" data-name="salud_en_tratamiento">¿Está actualmente bajo algún tratamiento médico?</div>
+  <div class="grid">
+    <label class="campo completo">¿Cuál?<input name="salud_tratamiento_cual"></label>
+    <label class="campo completo">Medicación que consume<input name="salud_medicacion"></label>
+  </div>
+  <div class="sino" data-name="salud_alergia_medicamento">¿Se conoce alérgico a algún medicamento?</div>
+  <label class="check"><input type="checkbox" name="salud_autoriza_uso" required> Autorizo el uso de esta información con fines laborales.</label>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Educación, formación y capacitación</legend>
+  <div class="grid">
+    <label class="campo">Nivel educativo alcanzado
+      <select name="nivel_educativo"><option value="">Seleccionar</option><option>Primaria</option><option>Secundaria</option><option>Técnico</option><option>Universitario (grado)</option><option>Posgrado</option></select>
+    </label>
+    <label class="campo">Título principal obtenido<input name="titulo_obtenido"></label>
+    <label class="campo">Institución<input name="institucion" placeholder="Colegio, escuela o universidad"></label>
+  </div>
+  <h2>Cursos o capacitaciones recientes (últimos 2-3 años)</h2>
+  <div id="g-cursos" class="grupo"></div>
+  <div class="sino" data-name="tiene_certificados">¿Cuenta con certificados de los cursos mencionados?</div>
+</fieldset>
+
+<fieldset class="seccion" hidden>
+  <legend>Medios de contacto y notificación oficial</legend>
+  <div class="grid">
+    <label class="campo">Número de teléfono móvil principal<input type="tel" name="celular_oficial" required></label>
+    <label class="campo">Correo electrónico<input type="email" name="correo_oficial" required></label>
+  </div>
+  <div class="sino" data-name="tiene_whatsapp">¿Cuenta con WhatsApp?</div>
+
+  <label class="check"><input type="checkbox" name="decl_datos_correctos" required> Declaro que los datos de contacto proporcionados son correctos y de uso personal.</label>
+  <label class="check"><input type="checkbox" name="decl_autoriza_medios" required> Autorizo a la empresa a utilizar correo electrónico y número de teléfono / WhatsApp como medios válidos de comunicación para notificaciones laborales, administrativas y entrega de documentos. Declaro que las comunicaciones enviadas por estos medios tendrán validez como notificación oficial y me comprometo a informar cualquier cambio de estos datos de manera inmediata.</label>
+  <label class="check"><input type="checkbox" name="decl_veracidad" required> Declaro que toda la información proporcionada es verdadera y actualizada. Este formulario tiene carácter de declaración jurada.</label>
+
+  <h2>Firma</h2>
+  <div class="grid">
+    <label class="campo doble">Nombre completo<input name="firma_nombre" required></label>
+    <label class="campo">C.I.<input name="firma_ci" required inputmode="numeric" pattern="[0-9.]{4,12}"></label>
+    <label class="campo">Fecha<input type="date" name="firma_fecha" required></label>
+  </div>
+</fieldset>
+
+<div class="acciones">
+  <button type="button" id="paso-anterior" class="secundario" hidden>Anterior</button>
+  <button type="button" id="paso-siguiente">Siguiente</button>
+  <button type="submit" id="enviar" hidden>Enviar ficha</button>
+</div>
+<p id="estado" class="estado" role="status" aria-live="polite"></p>
+
+</form>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

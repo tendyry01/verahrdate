@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Reportes de fichas · Recursos Humanos</title>
+  <link rel="stylesheet" href="assets/css/reportes.css">
+  <link rel="stylesheet" href="assets/css/craco-theme.css">
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/reportes.js" defer></script>
+</head>
+<body>
+  <div class="craco-shell">
+    <nav class="craco-nav" aria-label="Navegación principal">
+      <a href="./index.html" aria-current="page">Reportes</a>
+      <a href="./actualizacion.html">Actualizar ficha</a>
+    </nav>
+    <header class="craco-banner">
+      <div class="craco-banner-copy">
+        <h1>Gestión de Recursos Humanos</h1>
+        <p>Consulta de fichas de actualización del personal</p>
+      </div>
+    </header>
+  </div>
+  <main class="contenedor reportes-contenedor">
+    <header class="encabezado">
+      <p class="tblock">HOJA 04 · REPORTES DE RECURSOS HUMANOS</p>
+      <h1>Fichas de actualización</h1>
+      <p class="lede-small">Acceso reservado para consultar fichas y descargar sus reportes.</p>
+    </header>
+
+    <section id="login-panel" class="panel" aria-labelledby="login-titulo">
+      <h2 id="login-titulo">Iniciar sesión</h2>
+      <form id="login-form">
+        <label>Usuario
+          <input name="username" autocomplete="username" required>
+        </label>
+        <label>Contraseña
+          <input name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Ingresar</button>
+      </form>
+      <p id="login-estado" class="estado" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="reportes-panel" class="panel" aria-labelledby="reportes-titulo" hidden>
+      <div class="barra-panel">
+        <div>
+          <h2 id="reportes-titulo">Fichas registradas</h2>
+          <p id="usuario-actual" class="texto-secundario"></p>
+        </div>
+        <button id="cerrar-sesion" class="boton-secundario" type="button">Cerrar sesión</button>
+      </div>
+      <div class="barra-filtros">
+        <label class="buscador">Buscar en todas las columnas
+          <input id="busqueda-general" type="search" placeholder="Empresa, nombre, apellido o cédula" autocomplete="off">
+        </label>
+      </div>
+      <p id="reportes-estado" class="estado" role="status" aria-live="polite"></p>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Empresa</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Número de cédula</th>
+            </tr>
+            <tr class="filtros" aria-label="Filtrar columnas">
+              <th>
+                <label class="solo-lectores" for="filtro-empresa">Filtrar empresa</label>
+                <select id="filtro-empresa">
+                  <option value="">Todas las empresas</option>
+                  <option>Metalúrgica Vera SAE</option>
+                  <option>Galvamax SA</option>
+                  <option>Rackpar SA</option>
+                </select>
+              </th>
+              <th><label class="solo-lectores" for="filtro-nombre">Filtrar nombre</label><input id="filtro-nombre" type="search" autocomplete="off"></th>
+              <th><label class="solo-lectores" for="filtro-apellido">Filtrar apellido</label><input id="filtro-apellido" type="search" autocomplete="off"></th>
+              <th><label class="solo-lectores" for="filtro-cedula">Filtrar cédula</label><input id="filtro-cedula" type="search" inputmode="numeric" autocomplete="off"></th>
+            </tr>
+          </thead>
+          <tbody id="fichas">
+            <tr><td colspan="4">Cargando fichas…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <a href="./actualizacion.html">Ir al formulario de actualización</a>
+    </footer>
+  </main>
+</body>
+</html>
