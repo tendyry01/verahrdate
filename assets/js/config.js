@@ -5,4 +5,4 @@ const isLocalFrontend = window.location.protocol === 'file:'
 
 window.RRHH_API_BASE_URL = isLocalFrontend
   ? 'http://localhost:3001'
-  : 'https://api.cracotech.com';
+  : 'https://api.cracotech.com/rrhh';
