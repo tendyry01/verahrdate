@@ -3,11 +3,16 @@
 const state = document.getElementById('estado');
 const documentFrame = document.getElementById('documento');
 const id = new URLSearchParams(window.location.search).get('id');
+const tokenAuthMode = window.location.protocol === 'file:'
+  || window.location.hostname === 'tendyry01.github.io';
+const localFileMode = window.location.protocol === 'file:';
 const localFileToken = window.location.protocol === 'file:'
   ? new URLSearchParams(window.location.hash.slice(1)).get('token')
-  : null;
+  : window.location.hostname === 'tendyry01.github.io'
+    ? window.sessionStorage.getItem('rrhh.report.token')
+    : null;
 
-if (localFileToken) {
+if (localFileMode && localFileToken) {
   document.querySelectorAll('a[href="./index.html"]').forEach(link => {
     link.href = `./index.html#token=${encodeURIComponent(localFileToken)}`;
   });
@@ -16,15 +21,17 @@ if (localFileToken) {
 if (!id || !/^[1-9]\d*$/.test(id)) {
   state.textContent = 'El identificador de la ficha no es válido.';
   documentFrame.hidden = true;
-} else if (window.location.protocol === 'file:' && !localFileToken) {
+} else if (tokenAuthMode && !localFileToken) {
   state.textContent = 'Inicie sesión nuevamente desde los reportes para ver el PDF.';
   documentFrame.hidden = true;
 } else {
   const pdfUrl = `${window.RRHH_API_BASE_URL}/api/fichas/${encodeURIComponent(id)}/pdf`;
   if (localFileToken) {
-    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    if (localFileMode) {
+      history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    }
     fetch(pdfUrl, {
-      credentials: 'include',
+      credentials: 'omit',
       headers: { Authorization: `Bearer ${localFileToken}` }
     })
       .then(async response => {

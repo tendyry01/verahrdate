@@ -7,9 +7,13 @@ const loginEstado = document.getElementById('login-estado');
 const reportesEstado = document.getElementById('reportes-estado');
 const filas = document.getElementById('fichas');
 const apiBaseUrl = window.RRHH_API_BASE_URL;
+const tokenAuthMode = window.location.protocol === 'file:'
+  || window.location.hostname === 'tendyry01.github.io';
 let localFileToken = window.location.protocol === 'file:'
   ? new URLSearchParams(window.location.hash.slice(1)).get('token')
-  : null;
+  : window.location.hostname === 'tendyry01.github.io'
+    ? window.sessionStorage.getItem('rrhh.report.token')
+    : null;
 if (localFileToken) {
   history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
 }
@@ -29,8 +33,11 @@ async function api(url, options = {}) {
     ...(window.location.protocol === 'file:' && localFileToken ? { Authorization: `Bearer ${localFileToken}` } : {}),
     ...options.headers
   };
+  if (tokenAuthMode && localFileToken) {
+    headers.Authorization = `Bearer ${localFileToken}`;
+  }
   const response = await fetch(`${apiBaseUrl}${url}`, {
-    credentials: 'include',
+    credentials: tokenAuthMode ? 'omit' : 'include',
     ...options,
     headers
   });
@@ -135,7 +142,10 @@ loginForm.addEventListener('submit', async event => {
       method: 'POST',
       body: JSON.stringify(Object.fromEntries(new FormData(loginForm)))
     });
-    localFileToken = window.location.protocol === 'file:' ? result.token : null;
+    localFileToken = tokenAuthMode ? result.token : null;
+    if (window.location.hostname === 'tendyry01.github.io' && localFileToken) {
+      window.sessionStorage.setItem('rrhh.report.token', localFileToken);
+    }
     loginForm.reset();
     mostrarReportes(result);
   } catch (error) {
@@ -149,6 +159,9 @@ document.getElementById('cerrar-sesion').addEventListener('click', async () => {
   try {
     await api('/api/auth/logout', { method: 'POST' });
     localFileToken = null;
+    if (window.location.hostname === 'tendyry01.github.io') {
+      window.sessionStorage.removeItem('rrhh.report.token');
+    }
     mostrarLogin('La sesión se cerró correctamente.');
   } catch (error) {
     reportesEstado.textContent = error.message;
