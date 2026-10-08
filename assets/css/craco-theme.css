@@ -66,6 +66,7 @@ no m
     min-height: 72px;
     align-items: center;
     justify-content: flex-start;
+    gap: 16px clamp(24px, 3vw, 40px);
     padding: 8px clamp(16px, 4vw, 48px);
     background: var(--craco-blue);
     color: #fff;
@@ -77,6 +78,19 @@ no m
     height: clamp(78px, 9vw, 120px);
     max-width: min(100%, 200px);
     object-fit: contain;
+  }
+
+  .craco-banner-logos {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: clamp(14px, 1.8vw, 22px);
+  }
+
+  .craco-banner-logos img {
+    width: clamp(94px, 13vw, 150px);
+    height: 60px;
+    max-width: 30vw;
   }
 
   .craco-banner-copy {
@@ -356,6 +370,21 @@ no m
       width: calc(100% - 12px);
       margin: 8px auto 20px;
       padding: clamp(10px, 3vw, 16px);
+    }
+
+    .craco-banner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .craco-banner-logos {
+      width: 100%;
+      gap: clamp(12px, 4vw, 20px);
+    }
+
+    .craco-banner-logos img {
+      width: clamp(82px, 25vw, 120px);
+      max-width: 29vw;
     }
 
     .craco-nav {

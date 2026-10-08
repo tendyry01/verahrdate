@@ -15,6 +15,11 @@
     <a href="./actualizacion.html" aria-current="page">Actualizar ficha</a>
   </nav>
   <header class="craco-banner">
+    <div class="craco-banner-logos" role="group" aria-label="Logotipos de las empresas">
+      <img src="assets/img/mvsaelogo.png" alt="Metalúrgica Vera SAE">
+      <img src="assets/img/galvamaxlogo.png" alt="Galvamax">
+      <img src="assets/img/rackparlogo.png" alt="Rackpar">
+    </div>
     <div class="craco-banner-copy">
       <h1>Gestión de Recursos Humanos</h1>
       <p>Actualización de datos del personal · FR-158</p>
@@ -23,7 +28,6 @@
 </div>
 <main class="pagina">
 
-<p class="tblock">HOJA 03 · SISTEMA DE GESTIÓN DE PERSONAS</p>
 <header class="cabecera">
   <h1>Ficha de actualización de datos</h1>
   <dl class="control">
@@ -71,12 +75,12 @@
     <label class="campo">Lugar de nacimiento<input name="lugar_nacimiento" placeholder="Ciudad o localidad"></label>
     <label class="campo">Nacionalidad<input name="nacionalidad" value="Paraguaya"></label>
     <label class="campo campo--bloque">Cédula vigente · frente
-      <input type="file" name="cedula_frente" accept="image/png,image/jpeg,.png,.jpg,.jpeg" required>
-      <small>PNG, JPG o JPEG, hasta 5 MB.</small>
+      <input type="file" name="cedula_frente" accept="image/png,image/jpeg,.png,.jpg,.jpeg" capture="environment" required>
+      <small>PNG, JPG o JPEG, hasta 2 MB. En dispositivos con cámara puede tomar una foto.</small>
     </label>
     <label class="campo campo--bloque">Cédula vigente · reverso
-      <input type="file" name="cedula_reverso" accept="image/png,image/jpeg,.png,.jpg,.jpeg" required>
-      <small>PNG, JPG o JPEG, hasta 5 MB.</small>
+      <input type="file" name="cedula_reverso" accept="image/png,image/jpeg,.png,.jpg,.jpeg" capture="environment" required>
+      <small>PNG, JPG o JPEG, hasta 2 MB. En dispositivos con cámara puede tomar una foto.</small>
     </label>
   </div>
   <h2>Contacto personal</h2>

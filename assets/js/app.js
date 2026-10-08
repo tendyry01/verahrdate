@@ -2,7 +2,7 @@
 
 // Endpoint de tu API que recibe la ficha (POST multipart: "datos" = JSON, "cedula_frente" y "cedula_reverso" = archivos)
 const API_URL = `${window.RRHH_API_BASE_URL}/api/fichas-actualizacion`;
-const MAX_ARCHIVO = 5 * 1024 * 1024;
+const MAX_ARCHIVO = 2 * 1024 * 1024;
 const CENTRO_MAPA = [-25.2867, -57.647]; // Asunción; el mapa se mueve al marcar o usar el GPS
 
 const DEPARTAMENTOS = ['Capital', 'Concepción', 'San Pedro', 'Cordillera', 'Guairá', 'Caaguazú', 'Caazapá', 'Itapúa',
@@ -373,7 +373,7 @@ form.addEventListener('submit', async e => {
       return;
     }
     if (archivo.size > MAX_ARCHIVO) {
-      mostrar('error', `La cédula (${lado}) supera los 5 MB. Elija un archivo más liviano.`);
+      mostrar('error', `La cédula (${lado}) supera los 2 MB. Elija una imagen más liviana.`);
       return;
     }
     cuerpo.append(campo, archivo);
